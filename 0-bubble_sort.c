@@ -28,7 +28,7 @@ void swap(int *x, int *y)
 void bubble_sort(int *array, size_t size)
 {
 	 /* Set initially to 1 to ensure at least one pass */
-	int is_swp = 1;
+	int is_swp = 1, pass_count = 0;
 	size_t i;
 
 	if (!array || !size || size < 2)
@@ -37,6 +37,10 @@ void bubble_sort(int *array, size_t size)
 	while (is_swp)
 	{
 		is_swp = 0;  /* Reset the flag at the beginning of each pass */
+
+		if (pass_count == (int)size - 1)
+			break;
+
 		for (i = 0; i < size - 1; ++i)
 		{
 			if (array[i] > array[i + 1])
@@ -47,7 +51,6 @@ void bubble_sort(int *array, size_t size)
 				print_array(array, size);
 			}
 		}
-
 
 	}
 }
