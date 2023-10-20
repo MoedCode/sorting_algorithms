@@ -13,8 +13,6 @@ void bubble_sort(int *array, size_t size)
 	int is_swp = 1;
 	size_t i;
 
-	if (!array || !size || size < 2)
-		return;
 
 	while (is_swp)
 	{
@@ -30,6 +28,7 @@ void bubble_sort(int *array, size_t size)
 				print_array(array, size);
 			}
 		}
+
 
 	}
 }
