@@ -6,8 +6,10 @@
  * @size: size of the array
  * Return: (void)
 */
+
 void bubble_sort(int *array, size_t size)
 {
+	 /* Set initially to 1 to ensure at least one pass */
 	int is_swp = 1;
 	size_t i;
 
@@ -16,7 +18,7 @@ void bubble_sort(int *array, size_t size)
 
 	while (is_swp)
 	{
-		is_swp = 0;
+		is_swp = 0;  /* Reset the flag at the beginning of each pass */
 		for (i = 0; i < size - 1; ++i)
 		{
 			if (array[i] > array[i + 1])
@@ -25,10 +27,9 @@ void bubble_sort(int *array, size_t size)
 				array[i + 1] ^= array[i];
 				array[i] ^= array[i + 1];
 				is_swp = 1;
+				print_array(array, size);
 			}
 		}
-		if (is_swp)
-			print_array(array, size);
+
 	}
 }
-
