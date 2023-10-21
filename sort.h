@@ -3,7 +3,8 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <unistd.h>
-
+#define DEBUG(M) printf("%s%s:%d\n", M, __FILE__, __LINE__);
+#define DBG printf("%s:%d\n", __FILE__, __LINE__)
 /**
  * struct listint_s - Doubly linked list node
  *
@@ -22,5 +23,9 @@ int printIntAr(int arr[], size_t size);
 void swap(int *x, int *y);
 
 void bubble_sort(int *array, size_t size);
+void insertion_sort_list(listint_t **list);
+
 void print_array(const int *array, size_t size);
+void print_list(const listint_t *list);
+
 #endif
