@@ -28,10 +28,6 @@ void insertion_sort_list(listint_t **list)
 
 		while ((curr_cpy)->prev != NULL && (curr_cpy)->n < (curr_cpy)->prev->n)
 		{
-
-			/*printf("curr = %i < ", curr_cpy->n);*/
-			/*printf("prev = %i\n", curr->prev->n);*/
-
 			if (curr->next == NULL)
 				swap_last_two_nodes(curr_cpy);
 			else if (curr->prev->prev == NULL)
@@ -39,15 +35,7 @@ void insertion_sort_list(listint_t **list)
 			else if (curr->prev->prev != NULL)
 				swap_curr_with_prev_node(curr_cpy);
 			print_list(*list);
-
-			/**
-			 * listint* _t *tail = get_tail(*list);
-			 * print_r* everse(tail);
-			 * puts(""* );
-			 * puts(""* );
-			 */
 		}
-		/*puts("-----");*/
 		(curr) = (curr)->next;
 	}
 }
