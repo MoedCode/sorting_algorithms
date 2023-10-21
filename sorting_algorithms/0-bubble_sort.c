@@ -8,9 +8,10 @@ void bubble_sort(int *array, size_t size)
 	for (i = 0; i < size; i++)
 	{
 
-		for (j = i + 1; j < size; j++)
+		for (j = i; j < size; j++)
 		{
 			/*printf("arr[%li] = %i, arr[%li] = %i\n", i, array[i], j, array[j]);*/
+			printf("     arr[%i] > arr[%i] \n", array[j], array[i]);
 
 			if (array[j] > array[i])
 			{
