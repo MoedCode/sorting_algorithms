@@ -4,7 +4,7 @@
  * @x: pointer to  first integers
  * @y: pointer to  second integers
  * Return: void
-*/
+ */
 void swap(int *x, int *y)
 {
 	int tmp;
@@ -15,7 +15,6 @@ void swap(int *x, int *y)
 	tmp = *x;
 	*x = *y;
 	*y = tmp;
-
 }
 
 /**
@@ -23,35 +22,35 @@ void swap(int *x, int *y)
  * @array: (int *) pointer to an integer array to sort
  * @size: size of the array
  * Return: (void)
-*/
+ */
 
+#include "sort.h"
 void bubble_sort(int *array, size_t size)
 {
-	 /* Set initially to 1 to ensure at least one pass */
-	int is_swp = 1, pass_count = 0;
-	size_t i;
+	size_t i, j;
 
-	if (!array || !size || size < 2)
+	if (size < 2 || array == NULL)
 		return;
 
-	while (is_swp)
+	for (i = 0; i < size; i++)
 	{
-		is_swp = 0;  /* Reset the flag at the beginning of each pass */
+		int sorted = 0;
 
-		if (pass_count == (int)size - 1)
-			break;
-
-		for (i = 0; i < size - 1; ++i)
+		for (j = 0; j < size; j++)
 		{
-			if (array[i] > array[i + 1])
+			if (j + 1 < size && array[j] > array[j + 1])
 			{
+				int tmp = array[j + 1];
 
-				swap(&array[i], &array[i + 1]);
-				is_swp = 1;
+				array[j + 1] = array[j];
+				array[j] = tmp;
+
+				sorted = 1;
 				print_array(array, size);
 			}
 		}
-		pass_count++;
 
+		if (sorted == 0)
+			return;
 	}
 }
