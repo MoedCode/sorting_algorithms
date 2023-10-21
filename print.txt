@@ -2,9 +2,9 @@
 #include "sort.h"
 // swap with bitwise
 				/*
-				array[i] ^= array[i + 1];
-				array[i + 1] ^= array[i];
-				array[i] ^= array[i + 1];
+array[i] ^= array[i + 1];
+array[i + 1] ^= array[i];
+array[i] ^= array[i + 1];
 				*/
 
 /**/
