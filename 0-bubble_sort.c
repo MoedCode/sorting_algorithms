@@ -24,33 +24,32 @@ void swap(int *x, int *y)
  * Return: (void)
  */
 
-#include "sort.h"
 void bubble_sort(int *array, size_t size)
 {
-	size_t i, j;
+	/* Set initially to 1 to ensure at least one pass */
+	int is_swp = 1, pass_count = 0;
+	size_t i;
 
-	if (size < 2 || array == NULL)
+	if (!array || !size || size < 2)
 		return;
 
-	for (i = 0; i < size; i++)
+	while (is_swp)
 	{
-		int sorted = 0;
+		is_swp = 0; /* Reset the flag at the beginning of each pass */
 
-		for (j = 0; j < size; j++)
+		if (pass_count == (int)size - 1)
+			break;
+
+		for (i = 0; i < size - 1; ++i)
 		{
-			if (j + 1 < size && array[j] > array[j + 1])
+			if (array[i] > array[i + 1])
 			{
-				int tmp = array[j + 1];
 
-				array[j + 1] = array[j];
-				array[j] = tmp;
-
-				sorted = 1;
+				swap(&array[i], &array[i + 1]);
+				is_swp = 1;
 				print_array(array, size);
 			}
 		}
-
-		if (sorted == 0)
-			return;
+		pass_count++;
 	}
 }
