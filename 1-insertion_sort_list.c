@@ -71,7 +71,12 @@ int swap_curr_with_prev_node(listint_t *curr)
 }
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *curr = *list;
+	listint_t *curr;
+
+	if (list == NULL || *list == NULL)
+		return;
+
+	curr = *list;
 
 	while (curr != NULL)
 	{
