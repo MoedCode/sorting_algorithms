@@ -17,6 +17,7 @@ void swap(int *x, int *y)
 	tmp = *x;
 	*x = *y;
 	*y = tmp;
+
 }
 /**
  * swap_partition - sort the array portion according to start and end
@@ -40,8 +41,9 @@ int swap_partition(int array[], int start, int end, int size)
 	}
 	/* finally swap the pivot*/
 	swap(&array[i], &array[end]);
-	/* return rhe pivot*/
 	print_array(array, size);
+
+	/* return rhe pivot*/
 
 	return (i);
 }
@@ -61,6 +63,7 @@ int str_end_sort(int array[], int start, int end,int size)
 	if(array && start <= end)
 	{
 		pivot = swap_partition(array, start, end, size);
+
 		str_end_sort(array, start, pivot - 1, size);
 		str_end_sort(array, pivot + 1, end, size);
 
