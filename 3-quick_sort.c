@@ -30,20 +30,22 @@ int swap_partition(int array[], int start, int end)
 {
 	int pivot_value =  array[end], i = start, j;
 
-	for (j = start; j <= end; ++j)
+	for (j = start; j < end; ++j)
 	{
 		if (array[j] <= pivot_value)
 		{
 			swap(&array[i], &array[j]);
 			i++;
 		}
-		/* finally swap the pivot*/
-		swap(&array[i], &array[end]);
+
 	}
+	/* finally swap the pivot*/
+	swap(&array[i], &array[end]);
 	/* return rhe pivot*/
 
 	return (i);
 }
+
 
 /**
  * str_end_sort-   recursive function that sort  array  using quicksort algorithm .
@@ -56,7 +58,7 @@ int str_end_sort(int array[], int start, int end)
 {
 	int pivot;
 
-	if(array && start < end)
+	if(array && start <= end)
 	{
 		pivot = swap_partition(array, start, end);
 		str_end_sort(array, start, pivot - 1);
@@ -75,8 +77,8 @@ int str_end_sort(int array[], int start, int end)
 
 void quick_sort(int *array, size_t size)
 {
-	if (!array || !size)
-		return;
+	 if (!array || size < 2)
+        return;
 
 	str_end_sort(array, 0, size - 1);
 
