@@ -25,6 +25,7 @@ void selection_sort(int *array, size_t size)
 
 			if (array[j] < min_value)
 			{
+
 				smaller_value_found = 1;
 				min_value = array[j];
 				min_idx = j;
