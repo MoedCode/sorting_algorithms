@@ -26,7 +26,7 @@ void swap(int *x, int *y)
  * @end: index to end with
  * @Return: (int) index of the pivot, (0) on error
  */
-int swap_partition(int array[], int start, int end)
+int swap_partition(int array[], int start, int end, int size)
 {
 	int pivot_value =  array[end], i = start, j;
 
@@ -37,11 +37,11 @@ int swap_partition(int array[], int start, int end)
 			swap(&array[i], &array[j]);
 			i++;
 		}
-
 	}
 	/* finally swap the pivot*/
 	swap(&array[i], &array[end]);
 	/* return rhe pivot*/
+	print_array(array, size);
 
 	return (i);
 }
@@ -54,15 +54,15 @@ int swap_partition(int array[], int start, int end)
  * @right: index to end array partition to order  with .
  * Return: (1) on error if array is NULL or start !< end else return (0)
   */
-int str_end_sort(int array[], int start, int end)
+int str_end_sort(int array[], int start, int end,int size)
 {
 	int pivot;
 
 	if(array && start <= end)
 	{
-		pivot = swap_partition(array, start, end);
-		str_end_sort(array, start, pivot - 1);
-		str_end_sort(array, pivot + 1, end);
+		pivot = swap_partition(array, start, end, size);
+		str_end_sort(array, start, pivot - 1, size);
+		str_end_sort(array, pivot + 1, end, size);
 
 	}
 	else
@@ -80,6 +80,6 @@ void quick_sort(int *array, size_t size)
 	 if (!array || size < 2)
         return;
 
-	str_end_sort(array, 0, size - 1);
+	str_end_sort(array, 0, size - 1 , size);
 
 }
