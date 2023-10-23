@@ -23,37 +23,38 @@ void swap(int *x, int *y)
 }
 
 /**
- * lo_partition - sorts the array portion according to start and end
+ * lo_partition - sorts the array portion according to start_idx and end
  *
  * @array: pointer to array
  * @size: size of the array
- * @start_idx: index to start from
+ * @start_idx_idx: index to start_idx from
  * @end_idx: index to end with
  * Return: index of the pivot, 0 on error
  */
-int lo_partition(int *array, size_t size, int start_idx, int end_idx)
+int lo_partition(int *array, size_t size, size_t start_idx, size_t end_idx)
 {
-	int pivot = array[end_idx];
-	int j, i = start_idx;
+int pivot;
+size_t i, j;
+pivot = array[end_idx];
+i = start_idx - 1;
+for (j = start_idx; j < end_idx; j++)
+{
+	if (array[j] < pivot)
+	{
+	i++;
+	if (i != j)
+	{
+	swap(&array[i], &array[j]);
+	if (array[i] != array[j])
+	print_array(array, size);
+	}
+	}
 
-	for (j = start_idx; j < end_idx; j++)
-	{
-		if (array[j] <= pivot)
-		{
-			if (i < j)
-			{
-				swap(&array[i], &array[j]);
-				print_array(array, size);
-			}
-			i++;
-		}
-	}
-	if (array[i] > pivot)
-	{
-		swap(&array[i], &array[end_idx]);
-		print_array(array, size);
-	}
-	return (i);
+}
+	swap(&array[i + 1], &array[end_idx]);
+	if (array[i + 1] != array[end_idx])
+	print_array(array, size);
+		return (i + 1);
 }
 
 /**
@@ -61,21 +62,21 @@ int lo_partition(int *array, size_t size, int start_idx, int end_idx)
  * quicksort algorithm
  * @array: pointer to the array of integers to sort
  * @size: size of the array
- * @start: index to start array partition to order
+ * @start_idx: index to start_idx array partition to order
  * @end_idx: index to end array partition to order
- * Return: 1 on error if array is NULL or start <= end, 0 otherwise
+ * Return: 1 on error if array is NULL or start_idx <= end, 0 otherwise
  */
-int str_end_sort(int array[], int size, int start, int end)
+int str_end_sort(int array[], int size, int start_idx, int end)
 {
 	int pivot;
 
 	srand(time(NULL));
 
-	if (array && start < end)
+	if (array && start_idx < end)
 	{
-		pivot = lo_partition(array, size, start, end);
+		pivot = lo_partition(array, size, start_idx, end);
 
-		str_end_sort(array, size, start, pivot - 1);
+		str_end_sort(array, size, start_idx, pivot - 1);
 		str_end_sort(array, size, pivot + 1, end);
 	}
 	else
