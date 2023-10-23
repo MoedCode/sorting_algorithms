@@ -24,6 +24,31 @@ void swap(int *x, int *y)
  * @array: pointer to array that will be sort
  * @size: size of the array
  */
+ #include "sort.h"
+
+/**
+ * array_reverse - Reverse the order of elements in an integer array.
+ * @array: The integer array to be reversed.
+ * @size: The number of elements in the array.
+ *
+ * Description: This function takes an integer array and its size as input
+ * and reverses the order of elements in the array.
+ */
+void array_reverse(int array[], size_t size)
+{
+    size_t start = 0;
+    size_t end = size - 1;
+
+    while (start < end)
+    {
+        int temp = array[start];
+        array[start] = array[end];
+        array[end] = temp;
+        start++;
+        end--;
+    }
+}
+
 void shell_sort(int *array, size_t size)
 {
 	size_t gap, pass_count, i, j, is_swap = 1;
@@ -48,5 +73,6 @@ void shell_sort(int *array, size_t size)
 			}
 			print_array(array, size);
 		}
+		array_reverse(array, size);
 
 }
