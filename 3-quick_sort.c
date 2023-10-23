@@ -66,16 +66,20 @@ for (j = start_idx; j < end_idx; j++)
  * @end_idx: index to end array partition to order
  * Return: 1 on error if array is NULL or start_idx <= end, 0 otherwise
  */
-int str_end_sort(int *array, size_t low, size_t high, size_t size)
+void str_end_sort(int array[], int size, int start_idx, int end_idx)
 {
+	int pivot;
 
-	if (low < high)
+	srand(time(NULL));
+
+	if (array && start_idx < end_idx)
 	{
-	size_t pivot = lo_partition(array, low, high, size);
+		pivot = lo_partition(array, size, start_idx, end_idx);
 
-	str_end_sort(array, low, pivot - 1, size);
-	str_end_sort(array, pivot + 1, high, size);
+		str_end_sort(array, size, start_idx, pivot - 1);
+		str_end_sort(array, size, pivot + 1, end_idx);
 	}
+
 }
 
 /**
