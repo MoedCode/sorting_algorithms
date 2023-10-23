@@ -65,16 +65,16 @@ void shell_sort(int *array, size_t size)
 		j = gap / pass_count;
 		for (i = 0; j < size; i++, j++)
 		{
-			if (array[i] < array[j])
+			if (array[i] > array[j])
 			{
 				swap(&array[i], &array[j]);
-				if (j == size - 1 && array[i - gap] < array[i])
+				if (j == size - 1 && array[i - gap] > array[i])
 					swap(&array[i - gap], &array[i]);
 				is_swap = 1;
 			}
 		}
 			print_array(array, size);
 		}
-		array_reverse(array, size);
+
 
 }

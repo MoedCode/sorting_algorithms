@@ -51,7 +51,7 @@ void array_reverse(int array[], size_t size)
  */
  #include "sort.h"
 
-void shell_sort(int *array, size_t size)
+void _shell_sort(int *array, size_t size)
 {
 	size_t gap, pass_count, i, j, is_swap = 1;
 
@@ -77,25 +77,4 @@ void shell_sort(int *array, size_t size)
 		}
 		array_reverse(array, size);
 
-}
-#include <stdio.h>
-#include <stdlib.h>
-#include "sort.h"
-
-/**
- * main - Entry point
- *
- * Return: Always 0
- */
-int main(void)
-{
-    int array[] = {19, 48, 99, 71, 13, 52, 96, 73, 86, 7};
-    size_t n = sizeof(array) / sizeof(array[0]);
-
-    print_array(array, n);
-    printf("\n");
-    shell_sort(array, n);
-    printf("\n");
-    print_array(array, n);
-    return (0);
 }
