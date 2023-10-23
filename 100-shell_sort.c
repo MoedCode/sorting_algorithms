@@ -20,30 +20,6 @@ void swap(int *x, int *y)
 }
 
 /**
- * array_reverse - Reverse the order of elements in an integer array.
- * @array: The integer array to be reversed.
- * @size: The number of elements in the array.
- *
- * Description: This function takes an integer array and its size as input
- * and reverses the order of elements in the array.
- */
-void array_reverse(int array[], size_t size)
-{
-	size_t start = 0;
-	size_t end = size - 1;
-
-	while (start < end)
-	{
-		int temp = array[start];
-
-		array[start] = array[end];
-		array[end] = temp;
-		start++;
-		end--;
-	}
-}
-
-/**
  * shell_sort - sorts an array of integers in ascending order using the
  * Shell sort algorithm using the Knuth sequence
  * @array: pointer to array that will be sort
@@ -53,28 +29,29 @@ void array_reverse(int array[], size_t size)
 
 void shell_sort(int *array, size_t size)
 {
-	size_t gap, pass_count, i, j, is_swap = 1;
+	size_t gap = 1, i, j;
+	int tmp;
 
-	if (!array || !size)
+	if (!array || size < 2)
 		return;
 
-	gap = size / 2;
-	for (pass_count = 1; is_swap; pass_count++)
+	while (gap < size / 3)
+		gap = gap * 3 + 1;
+
+	while (gap > 0)
 	{
-		is_swap = 0;
-		j = gap / pass_count;
-		for (i = 0; j < size; i++, j++)
+		for (i = gap; i < size; i++)
 		{
-			if (array[i] > array[j])
+			tmp = array[i];
+			j = i;
+			while (j >= gap && array[j - gap] > tmp)
 			{
-				swap(&array[i], &array[j]);
-				if (j == size - 1 && array[i - gap] > array[i])
-					swap(&array[i - gap], &array[i]);
-				is_swap = 1;
+				array[j] = array[j - gap];
+				j -= gap;
 			}
+			array[j] = tmp;
 		}
-			print_array(array, size);
-		}
-
-
+		gap = (gap - 1) / 3;
+		print_array(array, size);
+	}
 }
