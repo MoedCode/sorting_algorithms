@@ -52,8 +52,6 @@ void str_end_sort(int array[], int size, int start_idx, int end_idx)
 {
 	int pivot;
 
-	srand(time(NULL));
-
 	if (array && start_idx < end_idx)
 	{
 		pivot = lo_partition(array, size, start_idx, end_idx);
