@@ -19,32 +19,30 @@
 }
 void counting_sort(int *array, size_t size)
 {
-	int max = getMaxInAr(array, size),
-	*count_arr, i, k = 0;
-	size_t  j;
-	count_arr = malloc(sizeof(int) * max);
+    int max = getMaxInAr(array, size);
+    int *count_arr;
+    int i, k = 0;
+	count_arr = (int *)calloc(( max + 1), sizeof(int));
+	if(!count_arr)
+	return;
 
 
-	for (i = 0; i < max; i++)
-		{
-			for (j = 0; j < size; j++)
-			{
-				if (array[j] == i)
-					count_arr[i]++;
-			}
+  for (i = 0; i < (int)size; i++)
+    {
+        count_arr[array[i]]++;
+    }
+    for (i = 0; i <= max; i++)
+    {
+        while (count_arr[i] > 0)
+        {
+            array[k] = i;
+            k++;
+            count_arr[i]--;
+        }
+    }
 
-		}
-	for (i = 0; i < max; i++)
-	{
-		if (count_arr[i] != 0)
-		{
-			array[k] = i;
-			k++;
-		}
-	}
 
-	print_array(count_arr, max);
-	printf("maix is [%d]", max);
+	print_array(count_arr, max + 1);
 	free(count_arr);
 
 
