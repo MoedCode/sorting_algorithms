@@ -3,7 +3,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <unistd.h>
-#define DEBUG(M) printf("%s%s:%d\n", M, __FILE__, __LINE__);
+/*#define DEBUG(M) printf("%s%s:%d\n", M, __FILE__, __LINE__);*/
 #define DBG printf("%s:%d\n", __FILE__, __LINE__)
 /**
  * struct listint_s - Doubly linked list node
@@ -35,10 +35,8 @@ void quick_sort(int *array, size_t size);
 
 void shell_sort(int *array, size_t size);
 
-
 void counting_sort(int *array, size_t size);
 
 void insertion_sort_list(listint_t **list);
-
 
 #endif
