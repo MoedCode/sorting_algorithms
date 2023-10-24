@@ -13,7 +13,7 @@
  * @end_idx: index to end with
  * Return: index of the pivot, 0 on error
  */
-int lo_partition(int *array, size_t size, size_t start_idx, size_t end_idx)
+int partition(int *array, size_t size, size_t start_idx, size_t end_idx)
 {
 	int pivot;
 	size_t i, j;
@@ -40,7 +40,7 @@ int lo_partition(int *array, size_t size, size_t start_idx, size_t end_idx)
 }
 
 /**
- * str_end_sort - recursive function that sorts the array using
+ * qs - recursive function that sorts the array using
  * quicksort algorithm
  * @array: pointer to the array of integers to sort
  * @size: size of the array
@@ -48,16 +48,16 @@ int lo_partition(int *array, size_t size, size_t start_idx, size_t end_idx)
  * @end_idx: index to end array partition to order
  * Return: 1 on error if array is NULL or start_idx <= end, 0 otherwise
  */
-void str_end_sort(int array[], int size, int start_idx, int end_idx)
+void qs(int array[], int size, int start_idx, int end_idx)
 {
 	int pivot;
 
 	if (array && start_idx < end_idx)
 	{
-		pivot = lo_partition(array, size, start_idx, end_idx);
+		pivot = partition(array, size, start_idx, end_idx);
 
-		str_end_sort(array, size, start_idx, pivot - 1);
-		str_end_sort(array, size, pivot + 1, end_idx);
+		qs(array, size, start_idx, pivot - 1);
+		qs(array, size, pivot + 1, end_idx);
 	}
 }
 
@@ -71,5 +71,5 @@ void quick_sort(int *array, size_t size)
 	if (!array || size < 2)
 		return;
 
-	str_end_sort(array, size, 0, size - 1);
+	qs(array, size, 0, size - 1);
 }
