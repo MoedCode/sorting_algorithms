@@ -2,7 +2,6 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
 /**
  * lo_partition - sorts the array portion according to start_idx and end
