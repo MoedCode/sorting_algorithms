@@ -1,22 +1,6 @@
 #include "sort.h"
 #include <stddef.h>
-/**
- * swap - swaps  tow integers
- * @x: pointer to  first integers
- * @y: pointer to  second integers
- * Return: void
- */
-void swap(int *x, int *y)
-{
-	int tmp;
 
-	if (x == NULL || y == NULL)
-		return;
-
-	tmp = *x;
-	*x = *y;
-	*y = tmp;
-}
 /**
  * selection_sort - sorts array using section algorithm
  * @array: pointer to array

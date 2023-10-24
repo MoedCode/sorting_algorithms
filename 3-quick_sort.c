@@ -4,23 +4,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-/**
- * swap - swaps two integers
- * @x: pointer to the first integer
- * @y: pointer to the second integer
- * Return: void
- */
-void swap(int *x, int *y)
-{
-	int tmp;
-
-	if (x == NULL || y == NULL)
-		return;
-
-	tmp = *x;
-	*x = *y;
-	*y = tmp;
-}
 
 /**
  * lo_partition - sorts the array portion according to start_idx and end
