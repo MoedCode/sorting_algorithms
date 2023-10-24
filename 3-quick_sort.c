@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-
 /**
  * lo_partition - sorts the array portion according to start_idx and end
  *
@@ -16,28 +15,28 @@
  */
 int lo_partition(int *array, size_t size, size_t start_idx, size_t end_idx)
 {
-int pivot;
-size_t i, j;
-pivot = array[end_idx];
-i = start_idx - 1;
-for (j = start_idx; j < end_idx; j++)
-{
-	if (array[j] < pivot)
+	int pivot;
+	size_t i, j;
+	pivot = array[end_idx];
+	i = start_idx - 1;
+	for (j = start_idx; j < end_idx; j++)
 	{
+		if (array[j] < pivot)
+		{
+			i++;
+			if (i != j)
+			{
+				swap(&array[i], &array[j]);
+				if (array[i] != array[j])
+					print_array(array, size);
+			}
+		}
+	}
 	i++;
-	if (i != j)
-	{
-	swap(&array[i], &array[j]);
-	if (array[i] != array[j])
-	print_array(array, size);
-	}
-	}
-
-}
-	swap(&array[i + 1], &array[end_idx]);
-	if (array[i + 1] != array[end_idx])
-	print_array(array, size);
-		return (i + 1);
+	swap(&array[i], &array[end_idx]);
+	if (array[i] != array[end_idx])
+		print_array(array, size);
+	return (i);
 }
 
 /**
@@ -62,7 +61,6 @@ void str_end_sort(int array[], int size, int start_idx, int end_idx)
 		str_end_sort(array, size, start_idx, pivot - 1);
 		str_end_sort(array, size, pivot + 1, end_idx);
 	}
-
 }
 
 /**
