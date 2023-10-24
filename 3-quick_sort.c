@@ -1,5 +1,9 @@
 #include "sort.h"
-
+/**
+ * swap - function that swaps 2 elements of the array
+ * @x: first element to be swapped
+ * @y: second  element to be swapped
+ */
 void swap(int *x, int *y)
 {
 	int tmp;
@@ -13,11 +17,11 @@ void swap(int *x, int *y)
 }
 
 /**
- * lo_partition - sorts the array portion according to start_idx and end
+ * partition - sorts the array portion according to start_idx and end
  *
  * @array: pointer to array
  * @size: size of the array
- * @start_idx_idx: index to start_idx from
+ * @start_idx: index to start_idx from
  * @end_idx: index to end with
  * Return: index of the pivot, 0 on error
  */
@@ -25,6 +29,7 @@ int partition(int *array, size_t size, size_t start_idx, size_t end_idx)
 {
 	int pivot;
 	size_t i, j;
+
 	pivot = array[end_idx];
 	i = start_idx - 1;
 	for (j = start_idx; j < end_idx; j++)
