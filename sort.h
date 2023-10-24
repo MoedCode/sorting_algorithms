@@ -34,11 +34,11 @@ void selection_sort(int *array, size_t size);
 void quick_sort(int *array, size_t size);
 
 void shell_sort(int *array, size_t size);
-<<<<<<< HEAD
+
 
 void counting_sort(int *array, size_t size);
-=======
+
 void insertion_sort_list(listint_t **list);
 
->>>>>>> ad86b0a7c2b801ad553131e42faf724fede7f7b7
+
 #endif
