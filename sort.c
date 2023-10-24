@@ -8,7 +8,7 @@
  * @y: pointer to  second integers
  * Return: void
 */
-void swap(int *x, int *y)
+void swap2(int *x, int *y)
 {
 	int tmp;
 

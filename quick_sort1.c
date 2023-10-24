@@ -9,7 +9,7 @@
  * @y: pointer to  second integers
  * Return: void
  */
-void swap(int *x, int *y)
+void swap2(int *x, int *y)
 {
 	int tmp;
 
@@ -58,7 +58,7 @@ void swap(int *x, int *y)
 		/* swap the elements at these positions in the array*/
 		if (above_pivot < below_pivot)
 		{
-			swap(array + above_pivot, array + below_pivot);
+			swap2(array + above_pivot, array + below_pivot);
 			/* Print the array to show the changes (debugging output)*/
 			print_array(array, size);
 		}

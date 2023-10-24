@@ -7,7 +7,7 @@
  * @y: pointer to the second integer
  * Return: void
  */
-void swap(int *x, int *y)
+void swap2(int *x, int *y)
 {
 	int tmp;
 
@@ -67,9 +67,9 @@ void _shell_sort(int *array, size_t size)
 		{
 			if (array[i] < array[j])
 			{
-				swap(&array[i], &array[j]);
+				swap2(&array[i], &array[j]);
 				if (j == size - 1 && array[i - gap] < array[i])
-					swap(&array[i - gap], &array[i]);
+					swap2(&array[i - gap], &array[i]);
 				is_swap = 1;
 			}
 		}

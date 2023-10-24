@@ -1,7 +1,15 @@
 #include "sort.h"
-#include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
+void swap(int *x, int *y)
+{
+	int tmp;
+
+	if (x == NULL || y == NULL)
+		return;
+
+	tmp = *x;
+	*x = *y;
+	*y = tmp;
+}
 
 /**
  * lo_partition - sorts the array portion according to start_idx and end
@@ -25,14 +33,14 @@ int partition(int *array, size_t size, size_t start_idx, size_t end_idx)
 			i++;
 			if (i != j)
 			{
-				swap(&array[i], &array[j]);
+				swap2(&array[i], &array[j]);
 				if (array[i] != array[j])
 					print_array(array, size);
 			}
 		}
 	}
 	i++;
-	swap(&array[i], &array[end_idx]);
+	swap2(&array[i], &array[end_idx]);
 	if (array[i] != array[end_idx])
 		print_array(array, size);
 	return (i);

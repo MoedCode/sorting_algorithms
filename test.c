@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "sort.h"
 int gl_size = 0;
-void qs(int arr[], int left, int right);
+void _qs(int arr[], int left, int right);
 // Function to print the array
 void printArray(int arr[], int size)
 {
@@ -14,13 +14,13 @@ void printArray(int arr[], int size)
 }
 
 // Function to swap two elements
-void swap(int *a, int *b)
+void swap2(int *a, int *b)
 {
 	int temp = *a;
 	*a = *b;
 	*b = temp;
 }
-int partition(int *arr, int start, int end)
+int _partition(int *arr, int start, int end)
 {
 	int pivot = arr[end];
 
@@ -63,14 +63,14 @@ int partition(int *arr, int start, int end)
 
 	return i;
 }
-void qs(int *arr, int start, int end)
+void _qs(int *arr, int start, int end)
 {
 	if (start > end)
 		return;
-	int pivot_pos = partition(arr, start, end);
+	int pivot_pos = _partition(arr, start, end);
 
-	qs(arr, start, pivot_pos - 1);
-	qs(arr, pivot_pos + 1, end);
+	_qs(arr, start, pivot_pos - 1);
+	_qs(arr, pivot_pos + 1, end);
 }
 
 int main(void)
@@ -80,7 +80,7 @@ int main(void)
 	gl_size = n;
 	print_array(array, n);
 	printf("--\n");
-	qs(array, 0, n - 1);
+	_qs(array, 0, n - 1);
 	printf("\n");
 	print_array(array, n);
 	return (0);

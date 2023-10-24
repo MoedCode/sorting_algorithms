@@ -20,7 +20,7 @@ typedef struct listint_s
 } listint_t;
 
 int printIntAr(int arr[], size_t size);
-void swap(int *x, int *y);
+void swap2(int *x, int *y);
 
 void bubble_sort(int *array, size_t size);
 void insertion_sort_list_(listint_t **list);

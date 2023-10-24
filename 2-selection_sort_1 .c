@@ -22,7 +22,7 @@ while (is_swap)
 	{
 		if (array[i] > array[i + 1])
 		{
-			swap(&array[i], &array[i + 1]);
+			swap2(&array[i], &array[i + 1]);
 			is_swap = 1;
 		}
 	}
