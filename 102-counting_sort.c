@@ -44,21 +44,22 @@ void counting_sort(int *array, size_t size)
 	if (!count_arr)
 		return;
 	output_arr = malloc((sizei + 1) * sizeof(int));
-	if(!output_arr)
+	if (!output_arr)
 		return;
 	/* set all index's to 0 */
-	for ( i = 0; i < max + 1; i++)
+	for (i = 0; i < max + 1; i++)
 		count_arr[i] = 0;
 	for (i = 0; i < sizei; i++)
 		count_arr[array[i]]++;
 
 	/* accumulating */
-	for ( i = 0; (int)i < max; i++)
-		count_arr[i] += count_arr[i -1];
+
+	for (i = 0; (int)i <= max; i++)
+		count_arr[i] += count_arr[i - 1];
 
 	print_array(count_arr, max + 1);
 
-	for (j = sizei -1; j >= 0; j--)
+	for (j = sizei - 1; j >= 0; j--)
 	{
 		output_arr[count_arr[array[j]] - 1] = array[j];
 		count_arr[array[j]]--;
