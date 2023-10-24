@@ -1,4 +1,5 @@
 #include "sort.h"
+
 void swap(int *x, int *y)
 {
 	int tmp;
@@ -33,14 +34,14 @@ int partition(int *array, size_t size, size_t start_idx, size_t end_idx)
 			i++;
 			if (i != j)
 			{
-				swap2(&array[i], &array[j]);
+				swap(&array[i], &array[j]);
 				if (array[i] != array[j])
 					print_array(array, size);
 			}
 		}
 	}
 	i++;
-	swap2(&array[i], &array[end_idx]);
+	swap(&array[i], &array[end_idx]);
 	if (array[i] != array[end_idx])
 		print_array(array, size);
 	return (i);
