@@ -79,6 +79,10 @@
     "sstream": "c",
     "streambuf": "c",
     "tuple": "c",
-    "type_traits": "c"
+    "type_traits": "c",
+    "MERG.C": "cpp",
+    "initializer_list": "cpp",
+    "utility": "cpp",
+    "algorithm": "cpp"
   }
 }

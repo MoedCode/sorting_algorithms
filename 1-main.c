@@ -41,8 +41,9 @@ listint_t *create_listint(const int *array, size_t size)
 int main(void)
 {
 	listint_t *list;
-	int array[] = {19, 48, 99, 71, 13, 52, 96, 73, 86, 7};
+	int array[] = {2, 1};
 	size_t n = sizeof(array) / sizeof(array[0]);
+	listint_t *tail;
 
 	list = create_listint(array, n);
 	if (!list)
@@ -52,5 +53,7 @@ int main(void)
 	insertion_sort_list(&list);
 	printf("\n");
 	print_list(list);
+	tail = get_tail(list);
+	print_reverse(tail);
 	return (0);
 }

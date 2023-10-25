@@ -28,12 +28,20 @@ void insertion_sort_list(listint_t **list)
 
 		while ((curr_cpy)->prev != NULL && (curr_cpy)->n < (curr_cpy)->prev->n)
 		{
-			if (curr->next == NULL)
+
+			if (curr->next == NULL && curr->prev->prev)
+			{
 				swap_last_two_nodes(curr_cpy);
+			}
 			else if (curr->prev->prev == NULL)
+			{
 				swap_first_two_nodes(curr_cpy, list);
+			}
 			else if (curr->prev->prev != NULL)
+			{
 				swap_curr_with_prev_node(curr_cpy);
+			}
+
 			print_list(*list);
 		}
 		(curr) = (curr)->next;
@@ -87,9 +95,13 @@ int swap_first_two_nodes(listint_t *curr, listint_t **list)
 {
 	listint_t *prev;
 	listint_t *curr_next;
+	int has_only_2_nodes = 0;
 
 	if (curr->prev->prev != NULL || curr->prev == NULL || curr == NULL)
 		return (-1);
+
+	if (curr->prev->prev == NULL && curr->next == NULL)
+		has_only_2_nodes = 1;
 
 	prev = ((curr)->prev);
 	curr_next = curr->next;
@@ -97,12 +109,17 @@ int swap_first_two_nodes(listint_t *curr, listint_t **list)
 	curr->next = prev;
 	curr->prev = NULL;
 
-	prev->next = curr_next;
+	if (has_only_2_nodes == 1)
+
+		prev->next = NULL;
+	else
+	{
+		prev->next = curr_next;
+		curr_next->prev = prev;
+	}
 	prev->prev = curr;
-	curr_next->prev = prev;
 
 	(*list) = curr;
-
 	return (1);
 }
 /**
