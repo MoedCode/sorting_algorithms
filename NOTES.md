@@ -8,7 +8,8 @@ A-
 5- LSD Least Significant Digit
 6- MSD Most Significant Digit
 
-B - Max Int Length
+    B -	Max Int Length
+
 in Radix Sort in case sorting array of integers
 1- get maximum integer in array
 2- get length of that number
