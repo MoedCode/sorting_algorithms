@@ -41,9 +41,8 @@ void insertion_sort_list(listint_t **list)
 			{
 				swap_curr_with_prev_node(curr_cpy);
 			}
-			else
 
-				print_list(*list);
+			print_list(*list);
 		}
 		(curr) = (curr)->next;
 	}

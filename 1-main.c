@@ -34,28 +34,6 @@ listint_t *create_listint(const int *array, size_t size)
 }
 
 /**
- * is_doubly_linked - Check if a doubly linked list is corectly linked
- *
- * @list: Pointer to the first node of the list to check
- *
- * Return: 1 if the list is correctly formated, 0 otherwise
- */
-int is_doubly_linked(const listint_t *list)
-{
-	const listint_t *prev;
-
-	prev = list ? list->prev : NULL;
-	while (list)
-	{
-		if (list->prev != prev)
-			return (0);
-		prev = list;
-		list = list->next;
-	}
-	return (1);
-}
-
-/**
  * main - Entry point
  *
  * Return: Always 0
@@ -63,8 +41,9 @@ int is_doubly_linked(const listint_t *list)
 int main(void)
 {
 	listint_t *list;
-	int array[] = {2, 1, 1};
+	int array[] = {2, 1};
 	size_t n = sizeof(array) / sizeof(array[0]);
+	listint_t *tail;
 
 	list = create_listint(array, n);
 	if (!list)
@@ -74,11 +53,7 @@ int main(void)
 	insertion_sort_list(&list);
 	printf("\n");
 	print_list(list);
-	if (!is_doubly_linked(list))
-	{
-		printf("The list is not correctly doubly linked !\n");
-
-		return (1);
-	}
+	tail = get_tail(list);
+	print_reverse(tail);
 	return (0);
 }
