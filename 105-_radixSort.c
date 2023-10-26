@@ -2,7 +2,6 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 /**
  * getMaxInAr - Get the Max value in the Array
@@ -37,39 +36,48 @@ int getMaxInAr(int *array, size_t size)
 
  int number_len(int n)
 {
-	unsigned int len, divisor;
+	unsigned int len = 0;
 
-	for(len = 0, divisor = 10; n; len++)
+	unsigned int divisor = 10;
+
+	while (n)
+	{
 		n = n / divisor;
+		len++;
+	}
 	return (len);
 }
 
-char *int2str(int n, int max_len)
+char *int2str(int n, int len)
 {
-	int len = number_len(n), divisor = 10, i, j, lenDif;
-	static char s[12];
-	if (!max_len || max_len < len || max_len + len > 10)
-	{
-		fprintf(stderr, "Err num len[%d], max_len[%d]", len, max_len);
-		return (NULL);
+	int temp, max_len, num_chars;
+	static char str[12];  /* Assuming a maximum of 11 digits and a null terminator */
+
+	if (len <= 0) {
+		fprintf(stderr, "Error: Length should be greater than 0\n");
+		return ("nill");
 	}
 
+	temp = n;
+	max_len = 0;
+	while (temp != 0) {
+		temp /= 10;
+		max_len++;
+	}
 
-	if ( max_len - len > 0)
-	{
-		lenDif = max_len - len;
-		for (j = 0; j < lenDif ; j++)
-			s[j] = '0';
+	if (len < max_len) {
+		fprintf(stderr, "Error: Length is too small to represent the integer\n");
+		return ("nill");
 	}
-	else
-		j = 0;
-	for(i = j; n; i++)
-	{
-		s[i] = n % divisor + '0';
-		n = n / divisor;
+
+	num_chars = snprintf(str, sizeof(str), "%0*d", len, n);
+
+	if (num_chars != len) {
+		fprintf(stderr, "Error: Conversion failed\n");
+		return ("nill");
 	}
-	s[i] = '\0';
-	return s;
+
+	return str;
 }
 void radix_sort(int *array, size_t size)
 {
@@ -88,23 +96,19 @@ void radix_sort(int *array, size_t size)
 
 	for (i = 0; i < size_i; i++)
 	{
-		output_array[i] = strdup(int2str(array[i],  max_int_len));
+		output_array[i] = int2str(array[i],  max_int_len);
 		printf("[%i]=%s, ", i, int2str(array[i],  max_int_len));
 		if (i == (size_i - 1))
 			puts("\n");
 	}
 	output_array[i] = NULL;
-	for (i = 0; i < size_i; i++)
-		if (output_array[i])
+	for (i = 0; i < size_i; i++) {
+		if (output_array[i]) {
 			printf("[%i]=%s, ", i, output_array[i]);
-
-	for (i = 0; i < size_i; i++)
-		if (output_array[i])
-			free(output_array[i]);
-
+		}
+	}
 
 	putchar(10);
-
 	free(output_array);
 
 }
