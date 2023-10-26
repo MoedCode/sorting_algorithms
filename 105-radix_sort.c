@@ -101,10 +101,7 @@ void radix_sort(int *array, size_t size)
 	for (i = 0; i < size_i; i++)
 		if (output_array[i])
 			free(output_array[i]);
-
-
 	putchar(10);
-
 	free(output_array);
 
 }
