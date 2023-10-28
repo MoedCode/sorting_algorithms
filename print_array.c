@@ -1,4 +1,5 @@
 #include "sort.h"
+#include <stddef.h>
 /**
  * print_array - Prints an array of integers
  *
@@ -14,7 +15,7 @@ void print_array(const int *array, size_t size)
 	{
 		if (i > 0)
 			printf(", ");
-		printf("%d", array[i]);
+		printf("[%d]=%d",(int)i, array[i]);
 		++i;
 	}
 	printf("\n");
@@ -35,4 +36,20 @@ void swap2(int *x, int *y)
 	tmp = *x;
 	*x = *y;
 	*y = tmp;
+}
+void print_2Dstr_arr(char **array, size_t size)
+{
+	/* __print for Debug purposes__ */
+
+	size_t i;
+	putchar('{');
+	for (i = 0; i < size; i++)
+		if (array[i])
+		{
+			if ((int)i > 0)
+				printf(",  ");
+			printf("[%i]=\"%s\"" ,(int)i, array[i]);
+		}
+	putchar('}');
+	putchar(10);
 }
