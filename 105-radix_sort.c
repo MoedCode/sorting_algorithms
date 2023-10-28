@@ -81,7 +81,7 @@ char *int_to_string(int n, int max_len) {
 
 void radix_sort(int *array, size_t size)
 {
-	int max_num, max_num_len , size_i = (int)size, i, pntTst = 0,
+	int max_num, max_num_len , size_i = (int)size, i, pntTst = 0, LSP,
 	bucket[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	char **output_array;
 
@@ -97,7 +97,7 @@ void radix_sort(int *array, size_t size)
 	print_2Dstr_arr(output_array, size);
 
 	for (i = 0; i < size_i; i++)
-		bucket[output_array[i][1] - '0']++;
+		bucket[output_array[i][max_num_len - 1] - '0']++;
 	print_array(bucket, 10);
 	/* free out put array*/
 	for (i = 0; i < size_i && pntTst; i++)
