@@ -57,7 +57,9 @@ void radix_sort(int *array, size_t size)
 			char *SAIdx = shifted_arr[j];
 			printf("J[%d]\n", j);
 			LSD = SAIdx[LSDIdx] - '0';
-			LSDVal = bucket[LSD] - 1;
+			LSDVal = bucket[LSD] ;
+			if (LSDVal)
+				LSDVal --;
 
 			if (bucket[LSD])
 				bucket[LSD]--;
