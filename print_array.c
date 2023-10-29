@@ -15,9 +15,25 @@ void print_array(const int *array, size_t size)
 	{
 		if (i > 0)
 			printf(", ");
+		printf("%d", array[i]);
+		++i;
+	}
+	printf("\n");
+}
+void _print_array(const int *array, size_t size)
+{
+	size_t i;
+
+	i = 0;
+	putchar('{');
+	while (array && i < size)
+	{
+		if (i > 0)
+			printf(", ");
 		printf("[%d]=%d",(int)i, array[i]);
 		++i;
 	}
+	putchar('}');
 	printf("\n");
 }
 /**

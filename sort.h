@@ -26,6 +26,7 @@ void bubble_sort(int *array, size_t size);
 void insertion_sort_list_(listint_t **list);
 
 void print_array(const int *array, size_t size);
+void _print_array(const int *array, size_t size);
 void print_2Dstr_arr(char **array, size_t size);
 
 void print_list(const listint_t *list);

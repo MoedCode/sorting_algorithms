@@ -5,6 +5,7 @@
 #include <string.h>
 #include <limits.h>
 
+
 /**
  * getMaxInAr - Get the Max value in the Array
  *
@@ -81,28 +82,75 @@ char *int_to_string(int n, int max_len) {
 
 void radix_sort(int *array, size_t size)
 {
-	int max_num, max_num_len , size_i = (int)size, i, pntTst = 0, LSP,
-	bucket[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-	char **output_array;
+	int max_num, max_num_len , size_i = (int)size, i ,j,
+	*bucket = calloc(sizeof(int), 10), LSD, LSDVal, pass, LSDIdx,
+	*output_arr = calloc(sizeof(int), size_i);
+	char **shifted_arr;
 
+	_print_array(array, size);
 	max_num = getMaxInAr(array, size);
 	max_num_len = number_len(max_num);
-	output_array = malloc((size_i) * sizeof(char *));
-	if (!output_array)
+	LSDIdx = max_num_len - 1;
+	shifted_arr = malloc((size_i) * sizeof(char *));
+	if (!shifted_arr)
 		return;
+
 	/* assign output array index's*/
 	for (i = 0; i < size_i; i++)
-		output_array[i] = strdup(int_to_string(array[i],  max_num_len));
-	output_array[i] = NULL;
-	print_2Dstr_arr(output_array, size);
+		shifted_arr[i] = strdup(int_to_string(array[i],  max_num_len));
+	shifted_arr[i] = NULL;
+	print_2Dstr_arr(shifted_arr, size);
 
 	for (i = 0; i < size_i; i++)
-		bucket[output_array[i][max_num_len - 1] - '0']++;
-	print_array(bucket, 10);
-	/* free out put array*/
-	for (i = 0; i < size_i && pntTst; i++)
-		if (output_array[i])
-			free(output_array[i]);
-	free(output_array);
-}
+		bucket[shifted_arr[i][max_num_len - 1] - '0']++;
+	_print_array(bucket, 10);
 
+	/* accumulating bucket array  */
+	for (i = 1; i < 10; i++)
+		{
+			bucket[i] = bucket[i] + bucket[i - 1];
+		}
+	printf("array after accumulation\n");
+	_print_array(bucket, 10);
+	/* SORTING */
+	for (i = 0, pass = 1; i < max_num_len; i++, pass++, LSDIdx--)
+	{
+		printf("      __Pass__= %d  LSDIdx: %d   \n", pass, LSDIdx);
+		for (j =  size_i ; j  >= 0; j--)
+		{
+			char *SAIdx = shifted_arr[j];
+			printf("J[%d]\n", j);
+			LSD = SAIdx[LSDIdx] - '0';
+			LSDVal = bucket[LSD];
+
+			if (bucket[LSD])
+				bucket[LSD]--;
+			printf("shifted_arr[value] = %s\n", shifted_arr[LSDVal]);
+
+		}
+
+	}
+	for (i = 0; i < size_i; i++)
+		array[i] = output_arr[i];
+
+	/* free out put array*/
+	for (i = 0; i < size_i ; i++)
+		if (shifted_arr[i])
+			free(shifted_arr[i]);
+	free(shifted_arr);
+	free(bucket);
+	free(output_arr);
+}
+/**
+
+	for (i = 0; i < max_num_len; i++)
+	{
+		for (i = 0; i < size_i; i++)
+		{
+			LSD = shifted_arr[i][max_num_len - 1] - '0';
+
+
+		}
+
+	}
+ */

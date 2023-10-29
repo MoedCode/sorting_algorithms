@@ -39,3 +39,26 @@ which is =0 by 1 so it will be [9] = 1, in [5] will be = 2
 cause there are tow digit LSD = 5 [1] = 05, [4] = 05
 numbers like if it was exist in array 45, 65, 85 will hve same LSD which is also 5
 {[0]= 0,[1]= 0,[2]= 0,[3]= 1,[4]= 0,[5]=2 ,[6]=0,[7]=1,[8]=0,[9]=1}
+
+D - in order to start radix sort create an output array with same size as targeted array
+/_ targeted array _/
+{[0]=432, [1]=8, [2]=530, [3]=90, [4]=88, [5]=231, [6]=11, [7]=45, [8]=677, [9]=199}
+
+/_ shifted targeted array _/
+{[0]="432", [1]="008", [2]="530", [3]="090", [4]="088", [5]="231", [6]="011", [7]="045", [8]="677", [9]="199"}
+
+/_ on shifted targeted array counting start from MSP since that is first pass then accumulation_/
+/_ accumulated cunt array_/
+{[0]=2, [1]=4, [2]=5, [3]=5, [4]=5, [5]=6, [6]=6, [7]=7, [8]=9, [9]=10}
+
+/_ on accumulated count array sorting process is start _/
+1- from last index in shifted targeted array which is [9]=199 LSD is 9
+2- since LSD is 9 in accumulated count array [9]=10 , Decrement [9]-- by 1 so [9]=9
+since that number will be placed in output array
+3 - in accumulated count array [9]=10 so value is 10 since the accumulated count is start from 1
+and index start from 0 we place the targeted array [9]=199 in output array [9]="199"
+repeat same process again
+targeted array [8]=677 => LSD 7 ; accumulated cunt array [7]=7, value , accumulated cunt array [7] -- = 6;
+7 -1 = index 6 ; so in output array [6] = [8]=677
+{[0]=0, [1]=0, [2]="530", [3]="090", [4]=0, [5]=45 , [6]=677, [7]=0, [8]=0, [9]=199}
+3-
