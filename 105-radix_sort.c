@@ -5,29 +5,93 @@
 #include <string.h>
 #include <limits.h>
 
+int getMaxInAr(int *array, size_t size);
+ int number_len(int n);
+char *int_to_string(int n, int max_len);
+size_t freeDoubleArray(char **argv);
+
+
+
+void radix_sort(int *array, size_t size)
+{
+	int max_num, max_num_len , size_i = (int)size, i ,j, k, L, x, y,
+	*bucket = calloc(sizeof(int), 10), LSD, LSDVal, pass, LSDIdx,
+	*output_arr = calloc(sizeof(int), size_i);
+	char **shifted_arr;
+
+	_print_array(array, size);
+	max_num = getMaxInAr(array, size);
+	max_num_len = number_len(max_num);
+	LSDIdx = max_num_len - 1;
+
+
+
+
+	/* SORTING */
+	for (i = 0, pass = 1; i < max_num_len; i++, pass++, LSDIdx--)
+	{
+				/* assign output array index's*/
+		shifted_arr = malloc((size_i) * sizeof(char *));
+		if (!shifted_arr)
+			return;
+		for (L = 0; L < size_i; L++)
+			shifted_arr[L] = strdup(int_to_string(array[L],  max_num_len));
+		shifted_arr[L] = NULL;
+		print_2Dstr_arr(shifted_arr, size);
+
+		for (x = 0; x < size_i; x++)
+			bucket[shifted_arr[x][max_num_len - 1] - '0']++;
+		_print_array(bucket, 10);
+
+		/* accumulating bucket array  */
+		for (y = 1; y < 10; y++)
+			{
+				bucket[y] = bucket[y] + bucket[y - 1];
+			}
+		printf("array after accumulation\n");
+		_print_array(bucket, 10);
+
+		printf("      __Pass__= %d  LSDIdx: %d   \n", pass, LSDIdx);
+		for (j =  size_i - 1, k = 0; j  >= 0; j--, k++)
+		{
+			char *SAIdx = shifted_arr[j];
+			printf("J[%d]\n", j);
+			LSD = SAIdx[LSDIdx] - '0';
+			LSDVal = bucket[LSD] - 1;
+
+			if (bucket[LSD])
+				bucket[LSD]--;
+
+			printf("shifted_arr[value] = %s : %d : %d\n", shifted_arr[j], LSD, LSDVal);
+
+		}
+		freeDoubleArray(shifted_arr);
+
+	}
+	for (i = 0; i < size_i; i++)
+		array[i] = output_arr[i];
+
+	/* free out put array*/
+
+	free(bucket);
+	free(output_arr);
+}
 
 /**
- * getMaxInAr - Get the Max value in the Array
- *
- * @array: pointer to array
- * @size: size of array
- * Return: positive (int) which is max, (-1) on error
- */
-int getMaxInAr(int *array, size_t size)
-{
-	size_t i;
-	int max = 0;
 
-	if (!array || !size)
-		return (-1);
-
-	for (i = 0, max = 0; i < size; i++)
+	for (i = 0; i < max_num_len; i++)
 	{
-		if (max < array[i])
-			max = array[i];
+		for (i = 0; i < size_i; i++)
+		{
+			LSD = shifted_arr[i][max_num_len - 1] - '0';
+
+
+		}
+
 	}
-	return (max);
-}
+ */
+
+
 /**
  * number_len - function that gets the length of a given numbers
  *
@@ -46,6 +110,32 @@ int getMaxInAr(int *array, size_t size)
 	return (len);
 }
 /**
+ * getMaxInAr - Get the Max value in the Array
+ *
+ * @array: pointer to array
+ * @size: size of array
+ * Return: positive (int) which is max, (-1) on error
+ */
+
+
+int getMaxInAr(int *array, size_t size)
+{
+	size_t i;
+	int max = 0;
+
+	if (!array || !size)
+		return (-1);
+
+	for (i = 0, max = 0; i < size; i++)
+	{
+		if (max < array[i])
+			max = array[i];
+	}
+	return (max);
+}
+
+
+/**
  * int_to_string - shift and cast  given int to string  right  by adding 0
  * to he left number of zeros = max_len - length of the number
  * it uses  number_len function to calculate it
@@ -55,8 +145,8 @@ int getMaxInAr(int *array, size_t size)
  * Return: (char*) string for a casted and shifted number,
  * (NULL) in cases error
  */
-char *int_to_string(int n, int max_len) {
-
+char *int_to_string(int n, int max_len)
+{
 	int i;
 	static char s[12];
 
@@ -64,8 +154,6 @@ char *int_to_string(int n, int max_len) {
 		fprintf(stderr, "Error: Invalid max_len %d\n", max_len);
 		return NULL;
 	}
-
-
 	i = max_len - 1;
 
 	s[max_len] = '\0';  /* Null-terminate the string.*/
@@ -79,78 +167,23 @@ char *int_to_string(int n, int max_len) {
 
 	return s;
 }
-
-void radix_sort(int *array, size_t size)
+size_t freeDoubleArray(char **argv)
 {
-	int max_num, max_num_len , size_i = (int)size, i ,j,
-	*bucket = calloc(sizeof(int), 10), LSD, LSDVal, pass, LSDIdx,
-	*output_arr = calloc(sizeof(int), size_i);
-	char **shifted_arr;
+	size_t i, j;
 
-	_print_array(array, size);
-	max_num = getMaxInAr(array, size);
-	max_num_len = number_len(max_num);
-	LSDIdx = max_num_len - 1;
-	shifted_arr = malloc((size_i) * sizeof(char *));
-	if (!shifted_arr)
-		return;
-
-	/* assign output array index's*/
-	for (i = 0; i < size_i; i++)
-		shifted_arr[i] = strdup(int_to_string(array[i],  max_num_len));
-	shifted_arr[i] = NULL;
-	print_2Dstr_arr(shifted_arr, size);
-
-	for (i = 0; i < size_i; i++)
-		bucket[shifted_arr[i][max_num_len - 1] - '0']++;
-	_print_array(bucket, 10);
-
-	/* accumulating bucket array  */
-	for (i = 1; i < 10; i++)
+	for (j = 0; argv[j]; j++)
+			;
+	for (i = 0; i <= j; i++)
+		if(argv[i])
 		{
-			bucket[i] = bucket[i] + bucket[i - 1];
-		}
-	printf("array after accumulation\n");
-	_print_array(bucket, 10);
-	/* SORTING */
-	for (i = 0, pass = 1; i < max_num_len; i++, pass++, LSDIdx--)
+
+			free(argv[i]);
+			argv[i] = NULL;
+ 		}
+	if(argv)
 	{
-		printf("      __Pass__= %d  LSDIdx: %d   \n", pass, LSDIdx);
-		for (j =  size_i ; j  >= 0; j--)
-		{
-			char *SAIdx = shifted_arr[j];
-			printf("J[%d]\n", j);
-			LSD = SAIdx[LSDIdx] - '0';
-			LSDVal = bucket[LSD];
-
-			if (bucket[LSD])
-				bucket[LSD]--;
-			printf("shifted_arr[value] = %s\n", shifted_arr[LSDVal]);
-
-		}
-
+	free(argv);
+	argv = NULL;
 	}
-	for (i = 0; i < size_i; i++)
-		array[i] = output_arr[i];
-
-	/* free out put array*/
-	for (i = 0; i < size_i ; i++)
-		if (shifted_arr[i])
-			free(shifted_arr[i]);
-	free(shifted_arr);
-	free(bucket);
-	free(output_arr);
+	return (i);
 }
-/**
-
-	for (i = 0; i < max_num_len; i++)
-	{
-		for (i = 0; i < size_i; i++)
-		{
-			LSD = shifted_arr[i][max_num_len - 1] - '0';
-
-
-		}
-
-	}
- */
