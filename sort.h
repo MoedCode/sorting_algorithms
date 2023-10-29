@@ -46,5 +46,5 @@ void insertion_sort_list(listint_t **list);
 void print_reverse(listint_t *lst);
 listint_t *get_tail(listint_t *lst);
 void radix_sort(int *array, size_t size);
+void _radix_sort(int *array, size_t size);
 
-#endif
