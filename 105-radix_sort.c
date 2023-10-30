@@ -14,14 +14,12 @@ int count_sort( int array[], size_t size, int pass);
 
 void radix_sort(int *array, size_t size)
 {
-	int max_n, pass, cai;
+	int max_n, pass;
 
 	max_n = getMaxInAr(array, size);
 	for (pass = 1; max_n /  pass  ; pass *= 10)
 		count_sort(array, size, pass);
 
-
-	printf("max_n %d ", max_n);
 }
 
 
@@ -66,31 +64,39 @@ int getMaxInAr(int *array, size_t size)
 	}
 	return (max);
 }
-int count_sort( int array[], size_t size, int pass)
+int count_sort(int array[], size_t size, int pass)
 {
-	 int  size_i = (int)size,
-	 *count = calloc(sizeof(int), 10),
-	 *tmp = calloc(sizeof(int), size_i),
-		i;
+    int size_i = (int)size;
+    int *count = calloc(sizeof(int), 10);
+    int *tmp = calloc(sizeof(int), size_i);
+    int i;
 
-	if(!pass || !array || !size)
-		return (-1);
-	for(i=0; i < size_i; i++)
-	{
-		++count[(array[i] / pass) % 10 ];
-		printf("=> %d", (array[i] / pass) % 10 );
-	}
-	for (i = 1; i <=9; i++)
-		count[i] += count[i-1];
+    if (!pass || !array || !size)
+        return (-1);
 
-	for (i = size_i; i > 0; i--)
-		tmp[(--count[(array[i] / pass) % 10 ]) ] = array[i];
-	for (i = 0; i < size_i; i++)
-		array[i] = tmp[i];
-	free(count);
-	free(tmp);
-	putchar(10);
+    /*Initialize count array with zeros.*/
+    for (i = 0; i < size_i; i++) {
+        ++count[(array[i] / pass) % 10];
+    }
 
-	return (0);
+    /*Update count array with prefix sums.*/
+    for (i = 1; i < 10; i++) {
+        count[i] += count[i - 1];
+    }
 
+    /*Build the output array 'tmp'.*/
+    for (i = size_i - 1; i >= 0; i--) {
+        tmp[--count[(array[i] / pass) % 10]] = array[i];
+    }
+
+    /*Copy 'tmp' back to 'array'.*/
+    for (i = 0; i < size_i; i++) {
+        array[i] = tmp[i];
+    }
+
+    free(count);
+    free(tmp);
+    putchar(10);
+
+    return (0);
 }
