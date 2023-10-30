@@ -18,7 +18,10 @@ void radix_sort(int *array, size_t size)
 
 	max_n = getMaxInAr(array, size);
 	for (pass = 1; max_n /  pass  ; pass *= 10)
+	{
 		count_sort(array, size, pass);
+		print_array(array, size);
+	}
 
 }
 
