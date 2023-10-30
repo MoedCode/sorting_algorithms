@@ -9,14 +9,17 @@ int getMaxInAr(int *array, size_t size);
  int number_len(int n);
 char *int_to_string(int n, int max_len);
 size_t freeDoubleArray(char **argv);
-
+int count_sort( int array[], size_t size, int pass);
 
 
 void radix_sort(int *array, size_t size)
 {
-	int max_n;
+	int max_n, pass, cai;
 
 	max_n = getMaxInAr(array, size);
+	for (pass = 1; max_n /  pass  ; pass *= 10)
+		count_sort(array, size, pass);
+
 
 	printf("max_n %d ", max_n);
 }
@@ -36,7 +39,7 @@ void radix_sort(int *array, size_t size)
 	unsigned int len, divisor;
 
 	for(len = 0, divisor = 10; n; len++)
-		n = n / divisor;
+			n = n / divisor;
 	return (len);
 }
 /**
@@ -63,57 +66,31 @@ int getMaxInAr(int *array, size_t size)
 	}
 	return (max);
 }
-
-
-/**
- * int_to_string - shift and cast  given int to string  right  by adding 0
- * to he left number of zeros = max_len - length of the number
- * it uses  number_len function to calculate it
- * returns the string
- * @n:number to be shift
- * @max_len: number of shifting steps must >= number length
- * Return: (char*) string for a casted and shifted number,
- * (NULL) in cases error
- */
-char *int_to_string(int n, int max_len)
+int count_sort( int array[], size_t size, int pass)
 {
-	int i;
-	static char s[12];
+	 int  size_i = (int)size,
+	 *count = calloc(sizeof(int), 10),
+	 *tmp = calloc(sizeof(int), size_i),
+		i;
 
-	if (max_len <= 0 || max_len > 10) {
-		fprintf(stderr, "Error: Invalid max_len %d\n", max_len);
-		return NULL;
-	}
-	i = max_len - 1;
-
-	s[max_len] = '\0';  /* Null-terminate the string.*/
-
-	/* Fill the string with digits from right to left.*/
-	while (i >= 0) {
-		s[i] = '0' + (n % 10);
-		n /= 10;
-		i--;
-	}
-
-	return s;
-}
-size_t freeDoubleArray(char **argv)
-{
-	size_t i, j;
-
-	for (j = 0; argv[j]; j++)
-			;
-	for (i = 0; i <= j; i++)
-		if(argv[i])
-		{
-
-			free(argv[i]);
-			argv[i] = NULL;
- 		}
-	if(argv)
+	if(!pass || !array || !size)
+		return (-1);
+	for(i=0; i < size_i; i++)
 	{
-	free(argv);
-	argv = NULL;
+		++count[(array[i] / pass) % 10 ];
+		printf("=> %d", (array[i] / pass) % 10 );
 	}
-	return (i);
+	for (i = 1; i <=9; i++)
+		count[i] += count[i-1];
+
+	for (i = size_i; i > 0; i--)
+		tmp[(--count[(array[i] / pass) % 10 ]) ] = array[i];
+	for (i = 0; i < size_i; i++)
+		array[i] = tmp[i];
+	free(count);
+	free(tmp);
+	putchar(10);
+
+	return (0);
+
 }
